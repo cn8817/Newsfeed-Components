@@ -86,7 +86,17 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Christines article',
+    date: '7/7/2021',
+    firstParagraph: `hi`,
+
+    secondParagraph: `bye`,
+
+    thirdParagraph: `<3`
   }
+
 ];
 
 /*
@@ -114,3 +124,45 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker({title, date, firstParagraph, secondParagraph, thirdParagraph}) {
+const panel = document.createElement('div')
+const articleTitle = document.createElement('h2')
+const articleDate = document.createElement('p')
+const articleP1 = document.createElement('p')
+const articleP2 = document.createElement('p')
+const articleP3 = document.createElement('p')
+const expand = document.createElement('span')
+
+panel.appendChild(articleTitle)
+panel.appendChild(articleDate)
+panel.appendChild(articleP1)
+panel.appendChild(articleP2)
+panel.appendChild(articleP3)
+panel.appendChild(expand)
+
+panel.classList.add('article')
+articleDate.classList.add('date')
+expand.classList.add('expandButton')
+
+articleTitle.textContent = title
+articleDate.textContent = date
+articleP1.textContent = firstParagraph
+articleP2.textContent = secondParagraph
+articleP3.textContent = thirdParagraph
+expand.textContent = '+'
+
+
+expand.addEventListener('click', () => {
+  panel.classList.toggle('article-open')
+})
+
+return panel
+}
+
+const articles = document.querySelector('.articles')
+const articleElements = data.map(data => {
+  return articleMaker(data)
+})
+
+articleElements.forEach(elem => articles.appendChild(elem))
